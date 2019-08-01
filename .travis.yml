@@ -1,13 +1,18 @@
+dist: xenial
+
 language: go
 
 go:
   - 1.x
 
 env:
-- GO111MODULE=on
+  - GO111MODULE=on
 
 script:
-- make build
+  - make build
+
+git:
+  depth: 1
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
