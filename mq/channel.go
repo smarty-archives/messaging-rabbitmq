@@ -76,9 +76,9 @@ func parseDestination(destination string) (string, string) {
 	if strings.HasPrefix(destination, "@") {
 		log.Printf("[INFO] Routing message with routing key [%s].", destination)
 		return "", destination[1:]
-	} else {
-		return destination, ""
 	}
+
+	return destination, ""
 }
 
 func (this *Channel) CommitTransaction() error {

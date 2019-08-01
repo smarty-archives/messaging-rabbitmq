@@ -232,15 +232,17 @@ func (this *Broker) ensureConnection() bool {
 func (this *Broker) openChannelFromExistingConnection() Channel {
 	// remember to only change the state (this.connection, this.state)
 	// within the protection of this.mutex
-	if channel, err := this.connection.Channel(); err != nil {
+	channel, err := this.connection.Channel()
+
+	if err != nil {
 		this.connection.Close()
 		this.connection = nil
 		this.updateState(messaging.Connecting)
 		return nil
-	} else {
-		this.updateState(messaging.Connected)
-		return channel
 	}
+
+	this.updateState(messaging.Connected)
+	return channel
 }
 
 var sleep = func(duration time.Duration) {
