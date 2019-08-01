@@ -9,12 +9,10 @@ env:
   - GO111MODULE=on
 
 script:
-  - go env
   - make build
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-  - npm install -g snyk && snyk test
 
 git:
   depth: 1
