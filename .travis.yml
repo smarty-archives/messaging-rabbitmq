@@ -1,4 +1,4 @@
-dist: xenial
+dist: bionic
 
 language: go
 
@@ -11,9 +11,9 @@ env:
 script:
   - make build
 
-git:
-  depth: 1
-
 after_success:
   - bash <(curl -s https://codecov.io/bash)
   - npm install -g snyk && snyk test
+
+git:
+  depth: 1
