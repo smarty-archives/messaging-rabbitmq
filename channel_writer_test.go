@@ -72,7 +72,7 @@ func (this *ChannelWriterFixture) TestCloseWriter() {
 	this.writer.Close()
 
 	this.So(this.writer.closed, should.BeTrue)
-	this.So(this.writer.Write(messaging.Dispatch{}), should.Equal, messaging.WriterClosedError)
+	this.So(this.writer.Write(messaging.Dispatch{}), should.Equal, messaging.ErrWriterClosed)
 }
 
 ///////////////////////////////////////////////////////////////

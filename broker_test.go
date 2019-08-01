@@ -51,7 +51,7 @@ func (this *BrokerFixture) assertConnectResult(initial, updated uint64, hasError
 
 	err := this.broker.Connect()
 	if hasError {
-		this.So(err, should.Equal, messaging.BrokerShuttingDownError)
+		this.So(err, should.Equal, messaging.ErrBrokerShuttingDown)
 	} else {
 		this.So(err, should.BeNil)
 	}

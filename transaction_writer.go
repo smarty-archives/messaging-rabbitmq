@@ -26,7 +26,7 @@ func transactionWriter(controller Controller) *TransactionWriter {
 
 func (this *TransactionWriter) Write(message messaging.Dispatch) error {
 	if !this.ensureChannel() {
-		return messaging.WriterClosedError
+		return messaging.ErrWriterClosed
 	}
 
 	// FUTURE: if error on publish, don't publish anything else

@@ -53,7 +53,7 @@ func (this *Broker) Connect() error {
 	defer this.mutex.Unlock()
 
 	if this.state == messaging.Disconnecting {
-		return messaging.BrokerShuttingDownError
+		return messaging.ErrBrokerShuttingDown
 	} else if this.state == messaging.Disconnected {
 		this.updateState(messaging.Connecting)
 	}

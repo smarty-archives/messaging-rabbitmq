@@ -20,7 +20,7 @@ func newWriter(controller Controller) *ChannelWriter {
 
 func (this *ChannelWriter) Write(message messaging.Dispatch) error {
 	if !this.ensureChannel() {
-		return messaging.WriterClosedError
+		return messaging.ErrWriterClosed
 	}
 
 	dispatch := toAMQPDispatch(message, clock.UTCNow())
