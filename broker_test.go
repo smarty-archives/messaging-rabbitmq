@@ -327,9 +327,9 @@ func (this *BrokerFixture) TestOpenChannelClosesConnectionOnFailure() {
 ////////////////////////////////////////////////////////
 
 func (this *BrokerFixture) TestStateChangesSentToCaller() {
-	var state uint64 = 0
+	var state uint64
 	this.broker.Notify(func(updated uint64) { state = updated })
-	this.broker.Connect()
+	_ = this.broker.Connect()
 	this.So(state, should.Equal, messaging.Connecting)
 }
 
@@ -337,7 +337,6 @@ func (this *BrokerFixture) TestStateChangesSentToCaller() {
 
 type FakeConnector struct {
 	attempts   int
-	target     url.URL
 	failures   int
 	connection *FakeConnection
 }
@@ -352,7 +351,7 @@ func NewFakeConnector(connectorFailures, connectionFailures int) *FakeConnector 
 func (this *FakeConnector) Connect(target url.URL) (Connection, error) {
 	this.attempts++
 	if this.failures >= this.attempts {
-		return nil, errors.New("Fail!")
+		return nil, errors.New("failure")
 	}
 
 	return this.connection, nil

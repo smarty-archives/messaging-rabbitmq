@@ -8,4 +8,7 @@ compile:
 
 build: test compile
 
-.PHONY: test compile build
+lint:
+	@golangci-lint run
+
+.PHONY: test compile build lint

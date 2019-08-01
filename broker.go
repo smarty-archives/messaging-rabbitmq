@@ -178,9 +178,9 @@ func (this *Broker) openWriter(transactional bool) messaging.Writer {
 
 	if transactional {
 		return transactionWriter(this)
-	} else {
-		return newWriter(this)
 	}
+
+	return newWriter(this)
 }
 
 func (this *Broker) openChannel(callback func() bool) Channel {

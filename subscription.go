@@ -58,17 +58,17 @@ func (this *Subscription) listen(input <-chan amqp.Delivery) {
 }
 
 func (this *Subscription) open() <-chan amqp.Delivery {
-	this.channel.ConfigureChannelBuffer(cap(this.output))
+	_ = this.channel.ConfigureChannelBuffer(cap(this.output))
 
 	queue, _ := this.declareQueue(this.queue)
 	this.bind(queue)
 
 	if len(this.queue) > 0 {
 		return this.consume()
-	} else {
-		this.queue = queue
-		return this.exclusiveConsume()
 	}
+
+	this.queue = queue
+	return this.exclusiveConsume()
 }
 func (this *Subscription) declareQueue(name string) (string, error) {
 	if len(name) == 0 {
@@ -76,9 +76,9 @@ func (this *Subscription) declareQueue(name string) (string, error) {
 	} else if err := this.channel.DeclareQueue(name); err != nil {
 		this.logger.Printf("[ERROR] Unable to declare queue [%s]: %s", name, err)
 		return "", err
-	} else {
-		return name, nil
 	}
+
+	return name, nil
 }
 func (this *Subscription) bind(name string) {
 	for _, exchange := range this.bindings {
@@ -102,5 +102,5 @@ func (this *Subscription) exclusiveConsume() <-chan amqp.Delivery {
 }
 
 func (this *Subscription) Close() {
-	this.channel.CancelConsumer(this.consumer)
+	_ = this.channel.CancelConsumer(this.consumer)
 }

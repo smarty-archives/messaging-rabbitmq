@@ -66,7 +66,7 @@ func (this *BatchAcknowledger) acknowledge() {
 	}
 }
 func acknowledge(receipt DeliveryReceipt) {
-	receipt.channel.AcknowledgeMultipleMessages(receipt.deliveryTag)
+	_ = receipt.channel.AcknowledgeMultipleMessages(receipt.deliveryTag)
 }
 
 func (this *BatchAcknowledger) isComplete() bool {

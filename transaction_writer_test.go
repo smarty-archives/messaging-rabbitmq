@@ -86,7 +86,7 @@ func (this *TransactionWriterFixture) TestCommitWithoutIsNoop() {
 }
 
 func (this *TransactionWriterFixture) TestCommitCallsUnderlyingChannel() {
-	this.writer.Write(messaging.Dispatch{})
+	_ = this.writer.Write(messaging.Dispatch{})
 
 	err := this.writer.Commit()
 	this.So(err, should.BeNil)
@@ -94,7 +94,7 @@ func (this *TransactionWriterFixture) TestCommitCallsUnderlyingChannel() {
 }
 
 func (this *TransactionWriterFixture) TestFailedCommitsReturnError() {
-	this.writer.Write(messaging.Dispatch{})
+	_ = this.writer.Write(messaging.Dispatch{})
 	this.controller.channel.err = errors.New("Commit failure")
 
 	err := this.writer.Commit()

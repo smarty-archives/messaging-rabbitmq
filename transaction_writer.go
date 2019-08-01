@@ -71,7 +71,7 @@ func (this *TransactionWriter) ensureChannel() bool {
 		return false
 	}
 
-	this.channel.ConfigureChannelAsTransactional()
+	_ = this.channel.ConfigureChannelAsTransactional()
 	return true
 }
 
