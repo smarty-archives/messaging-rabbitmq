@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/smartystreets/messaging"
+	"github.com/smartystreets/messaging/v2"
 	"github.com/streadway/amqp"
 )
 

@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/smartystreets/messaging"
+	"github.com/smartystreets/messaging/v2"
 )
 
 type Broker struct {

@@ -4,7 +4,7 @@ import (
 	"sync"
 
 	"github.com/smartystreets/clock"
-	"github.com/smartystreets/messaging"
+	"github.com/smartystreets/messaging/v2"
 )
 
 type ChannelWriter struct {

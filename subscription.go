@@ -5,7 +5,7 @@ import (
 
 	"github.com/smartystreets/clock"
 	"github.com/smartystreets/logging"
-	"github.com/smartystreets/messaging"
+	"github.com/smartystreets/messaging/v2"
 	"github.com/streadway/amqp"
 )
 
