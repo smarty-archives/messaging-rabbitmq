@@ -1,14 +1,14 @@
 #!/usr/bin/make -f
 
-test:
-	go test -timeout=1s -covermode=atomic .
+test: fmt
+	go test -timeout=1s -covermode=atomic -count=1 ./...
+
+fmt:
+	go fmt ./...
 
 compile:
 	go build ./...
 
 build: test compile
 
-lint:
-	@golangci-lint run
-
-.PHONY: test compile build lint
+.PHONY: test fmt compile build
