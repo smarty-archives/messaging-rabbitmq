@@ -5,7 +5,6 @@ import (
 	"time"
 
 	"github.com/smartystreets/assertions/should"
-	"github.com/smartystreets/clock"
 	"github.com/smartystreets/gunit"
 	"github.com/smartystreets/messaging/v2"
 	"github.com/streadway/amqp"
@@ -21,7 +20,7 @@ type RabbitAdapterFixture struct {
 }
 
 func (this *RabbitAdapterFixture) Setup() {
-	this.now = clock.UTCNow()
+	this.now = utcNow()
 }
 
 /////////////////////////////////////////////////////////////////////////////////

@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/smartystreets/assertions/should"
-	"github.com/smartystreets/clock"
 	"github.com/smartystreets/gunit"
 	"github.com/smartystreets/logging"
 	"github.com/smartystreets/messaging/v2"
@@ -167,7 +166,7 @@ func (this *FakeSubscriptionChannel) DeclareQueue(name string) error {
 	return nil
 }
 func (this *FakeSubscriptionChannel) DeclareTransientQueue() (string, error) {
-	return strconv.FormatInt(clock.UTCNow().UnixNano(), 10), nil
+	return strconv.FormatInt(time.Now().UTC().UnixNano(), 10), nil
 }
 func (this *FakeSubscriptionChannel) BindExchangeToQueue(queue string, exchange string) error {
 	this.boundQueue = append(this.boundQueue, queue)

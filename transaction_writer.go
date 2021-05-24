@@ -3,7 +3,6 @@ package rabbitmq
 import (
 	"sync"
 
-	"github.com/smartystreets/clock"
 	"github.com/smartystreets/logging"
 	"github.com/smartystreets/messaging/v2"
 )
@@ -32,7 +31,7 @@ func (this *TransactionWriter) Write(message messaging.Dispatch) error {
 	// FUTURE: if error on publish, don't publish anything else
 	// until we reset the channel during commit
 	// opening a new channel is what marks it as able to continue
-	dispatch := toAMQPDispatch(message, clock.UTCNow())
+	dispatch := toAMQPDispatch(message, utcNow())
 	return this.channel.PublishMessage(message.Destination, message.Partition, dispatch)
 }
 

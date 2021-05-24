@@ -2,8 +2,8 @@ package rabbitmq
 
 import (
 	"sync"
+	"time"
 
-	"github.com/smartystreets/clock"
 	"github.com/smartystreets/messaging/v2"
 )
 
@@ -23,7 +23,7 @@ func (this *ChannelWriter) Write(message messaging.Dispatch) error {
 		return messaging.ErrWriterClosed
 	}
 
-	dispatch := toAMQPDispatch(message, clock.UTCNow())
+	dispatch := toAMQPDispatch(message, utcNow())
 	err := this.channel.PublishMessage(message.Destination, message.Partition, dispatch)
 	if err == nil {
 		return nil
@@ -33,7 +33,9 @@ func (this *ChannelWriter) Write(message messaging.Dispatch) error {
 	this.channel = nil
 	return err
 }
-
+func utcNow() time.Time {
+	return time.Now().UTC()
+}
 func (this *ChannelWriter) Commit() error {
 	return nil
 }
