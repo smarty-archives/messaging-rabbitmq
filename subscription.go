@@ -1,17 +1,15 @@
 package rabbitmq
 
 import (
+	"log"
 	"strconv"
 	"time"
 
-	"github.com/smartystreets/logging"
 	"github.com/smartystreets/messaging/v2"
 	"github.com/streadway/amqp"
 )
 
 type Subscription struct {
-	logger *logging.Logger
-
 	channel       Consumer
 	queue         string
 	consumer      string
@@ -74,7 +72,7 @@ func (this *Subscription) declareQueue(name string) (string, error) {
 	if len(name) == 0 {
 		return this.channel.DeclareTransientQueue()
 	} else if err := this.channel.DeclareQueue(name); err != nil {
-		this.logger.Printf("[ERROR] Unable to declare queue [%s]: %s", name, err)
+		log.Printf("[ERROR] Unable to declare queue [%s]: %s", name, err)
 		return "", err
 	}
 
@@ -83,11 +81,11 @@ func (this *Subscription) declareQueue(name string) (string, error) {
 func (this *Subscription) bind(name string) {
 	for _, exchange := range this.bindings {
 		if err := this.channel.DeclareExchange(exchange, "fanout"); err != nil {
-			this.logger.Printf("[ERROR] Unable to create [%s] exchange [%s]: %s", "fanout", exchange, err)
+			log.Printf("[ERROR] Unable to create [%s] exchange [%s]: %s", "fanout", exchange, err)
 		}
 
 		if err := this.channel.BindExchangeToQueue(name, exchange); err != nil {
-			this.logger.Printf("[ERROR] Unable to bind exchange [%s] to queue [%s]: %s", exchange, name, err)
+			log.Printf("[ERROR] Unable to bind exchange [%s] to queue [%s]: %s", exchange, name, err)
 		}
 	}
 }

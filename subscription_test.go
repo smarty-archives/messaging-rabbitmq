@@ -7,7 +7,6 @@ import (
 
 	"github.com/smartystreets/assertions/should"
 	"github.com/smartystreets/gunit"
-	"github.com/smartystreets/logging"
 	"github.com/smartystreets/messaging/v2"
 	"github.com/streadway/amqp"
 )
@@ -37,7 +36,6 @@ func (this *SubscriptionFixture) createSubscription() {
 	this.subscription = newSubscription(
 		this.channel, this.queue, this.bindings,
 		this.control, this.output)
-	this.subscription.logger = logging.Capture()
 }
 
 //////////////////////////////////////////////////////////////////
